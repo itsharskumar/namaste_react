@@ -20,7 +20,7 @@ const [btnName,setbtnName]=useState("Login");
           <li>ContactUs</li>
           <li>Cart</li>
           <li><button className="login-btn" onClick={()=>{
-            setbtnName("Logout");
+           btnName=="Login"?setbtnName("Logout"):setbtnName("Login");
           }}>{btnName}</button></li>
         </ul>
       </div>

@@ -6,7 +6,15 @@ const ResturantCard = (props) => {
 
   const { cloudinaryImageId, name, cuisines, avgRating, sla } = resObj?.info;
   const { deliveryTime } = sla; //because delivery is in the sla so we deconstruct it
+  const restaurantLink = resObj?.cta?.link;
   return (
+
+     <a
+      href={restaurantLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="res-link"
+    >
     <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
       {/* <img className="res-logo"src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/FOOD_CATALOG/IMAGES/CMS/2025/5/17/57c9176a-f4c7-4ca3-8db3-d7d7a531d65f_993ef335-5221-48f3-9e70-2725d14a6dc8.jpg"></img> */}
       <img
@@ -23,6 +31,7 @@ const ResturantCard = (props) => {
         <h4>{deliveryTime} mins</h4>
       </div>
     </div>
+    </a>
   );
 };
 export default ResturantCard;
