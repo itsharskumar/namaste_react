@@ -11,6 +11,6 @@ Day4/node_modules/
 Day7/dist
 Day7/.parcel-cache
 Day7/node_modules/
-
+/swiggy
 # backend
 backend/node_modules

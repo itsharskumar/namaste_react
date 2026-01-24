@@ -5,44 +5,49 @@ import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [resturants, setResturants] = useState([]);
-
-  const [filteredResturant,setfilteredResturant]=useState([]);
+  const [filteredResturant, setfilteredResturant] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     fetchData();
   }, []);
 
-  // const fetchData=async()=>{
-  //   const data=await fetch("https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.5199&lng=77.4587&page_type=DESKTOP_WEB_LISTING");
-
-  //   const json=await data.json();
-  //   console.log(json)
-  // }//not working
-
   const fetchData = async () => {
-    const res = await fetch("http://localhost:5000/api/restaurants");
-    const json = await res.json();
+    try {
+      const res = await fetch("http://localhost:5000/api/restaurants");
 
-    const restaurantCard = json?.data?.cards?.find(
-      (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants,
-    );
+      if (!res.ok) {
+        throw new Error("API failed");
+      }
 
-    // Swiggy data is nested (for now just log)
-    console.log(json);
-    const restaurants =
-      restaurantCard?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      const json = await res.json();
 
-    // json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
-    //   ?.restaurants;//thisis failing because position changes
+      const restaurantCard = json?.data?.cards?.find(
+        (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      );
 
-    setResturants(restaurants || resList);
-    setfilteredResturant(restaurants||resList);
+      const restaurants =
+        restaurantCard?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+
+      // ✅ success path
+      setResturants(restaurants);
+      setfilteredResturant(restaurants);
+    } catch (error) {
+      console.error("API failed, loading mock data", error);
+
+      // ✅ fallback path
+      setResturants(resList);
+      setfilteredResturant(resList);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  console.log("body rendered")
-  return resturants.length === 0 ? (
-    <Shimmer></Shimmer> //when the resutrant is zero
-  ) : (
+  // ✅ loading UI
+  if (loading) return <Shimmer />;
+
+  return (
     <div className="body">
       <div className="filter">
         <div className="search">
@@ -50,23 +55,18 @@ const Body = () => {
             type="text"
             className="search-bar"
             value={searchText}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
+            onChange={(e) => setSearchText(e.target.value)}
           />
           <button
             className="search-btn"
             onClick={() => {
-              console.log(searchText);
-
               const filteredR = resturants.filter((res) =>
-      res.info.name.toLowerCase().includes(searchText.toLowerCase())
-    );
-
-    // setResturants(filteredRestaurant);
-    setfilteredResturant(filteredR);
+                res.info.name
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase())
+              );
+              setfilteredResturant(filteredR);
             }}
-
           >
             Search
           </button>
@@ -76,25 +76,25 @@ const Body = () => {
           className="filter-btn"
           onClick={() => {
             const filteredList = resturants.filter(
-              (res) => res.info.avgRating > 4,
+              (res) => res.info.avgRating > 4
             );
-
-          
             setfilteredResturant(filteredList);
           }}
         >
           Top Rated Resturants
         </button>
       </div>
+
       <div className="res-container">
         {filteredResturant.map((resturant) => (
           <ResturantCard
             key={resturant.info.id}
             resObj={resturant}
-          ></ResturantCard>
+          />
         ))}
       </div>
     </div>
   );
 };
+
 export default Body;
