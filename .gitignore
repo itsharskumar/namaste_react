@@ -8,6 +8,9 @@ Day3/.parcel-cache
 Day4/dist
 Day4/.parcel-cache
 Day4/node_modules/
+Day7/dist
+Day7/.parcel-cache
+Day7/node_modules/
 
 # backend
 backend/node_modules
