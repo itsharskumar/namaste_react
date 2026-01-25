@@ -12,5 +12,16 @@ Day7/dist
 Day7/.parcel-cache
 Day7/node_modules/
 /swiggy
+/Tailwind/my-react-app/node_modules
+/Tailwind/my-react-app/public
+/Tailwind/my-react-app/package-lock.json
+/Tailwind/my-react-app/package.json
+/Tailwind/my-react-app/postcss.config.js
+/Tailwind/my-react-app/postcss.config.js
+/Tailwind/my-react-app/postcss.config.js
+/Tailwind/my-react-app/tailwind.config.js
+/Tailwind/my-react-app/vite.config.js
+/Tailwind/my-react-app/README.md
+/Tailwind/my-react-app/vite.config.js
 # backend
 backend/node_modules
