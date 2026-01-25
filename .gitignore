@@ -23,5 +23,13 @@ Day7/node_modules/
 /Tailwind/my-react-app/vite.config.js
 /Tailwind/my-react-app/README.md
 /Tailwind/my-react-app/vite.config.js
+
+
+Practice/react/Learning/node_modules
+Practice/react/Learning/public
+Practice/react/Learning/eslint.config.js
+Practice/react/Learning/package-lock.json
+Practice/react/Learning/package.json
+Practice/react/Learning/vite.config.js
 # backend
 backend/node_modules
