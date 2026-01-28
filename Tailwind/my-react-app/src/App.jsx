@@ -1,10 +1,29 @@
-import {Otp} from "./components/Otp"
-function App(){
+import Navbar from "./components/Navbar";
+import CustomCursor from "./components/CustomCursor";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Projects from "./components/Projects";
+import Skills from "./components/Skills";
+import Experience from "./components/Experience";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
+function App() {
   return (
-    <div className="h-screen bg-blue-700 flex justify-center items-center">
-  <Otp></Otp>
-    </div>
-  )
+    <>
+      <CustomCursor />
+      <div className="min-h-screen bg-black text-white">
+        <Navbar />
+        <Hero />
+        <About />
+        <Projects />
+        <Skills />
+        <Experience />
+        <Contact />
+        <Footer />
+      </div>
+    </>
+  );
 }
+
 export default App;
